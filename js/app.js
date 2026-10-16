@@ -71,23 +71,26 @@ function loadAdsenseScript() {
     document.head.appendChild(s);
 }
 
-/** بناء كتلة إعلان (نائب إن كانت الإعلانات معطّلة، أو عنصر ins إن كانت مفعّلة) */
-function buildAdBlock(slotId, extraClass) {
+/** بناء كتلة إعلان (نائب إن كانت الإعلانات معطّلة، أو عنصر ins إن كانت مفعّلة)
+ *  format: "horizontal" للبانرات القصيرة، "rectangle" للمحتوى، "auto" الافتراضي */
+function buildAdBlock(slotId, extraClass, format) {
     const cls = "ad-zone " + (extraClass || "");
     const label = '<div class="ad-label">إعلان</div>';
+    const fmt = format || "auto";
+    const fwr = fmt === "auto" ? ' data-full-width-responsive="true"' : "";
 
     if (!siteConfig.adsense.enabled) {
         // نائب واضح يُعلم الزائر والمراجع أن هذا موضع إعلان مستقبلي
-        return '<div class="' + cls + '">' + label +
+        return '<div class="' + cls + '" data-ad-type="' + escapeHtml(fmt) + '">' + label +
             '<div style="color:#9a8b7c;font-size:.85rem">مساحة إعلانية — تُفعَّل بعد قبول الموقع في أدسنس</div>' +
             '</div>';
     }
 
-    return '<div class="' + cls + '">' + label +
+    return '<div class="' + cls + '" data-ad-type="' + escapeHtml(fmt) + '">' + label +
         '<ins class="adsbygoogle" style="display:block" ' +
         'data-ad-client="' + escapeHtml(siteConfig.adsense.client) + '" ' +
         'data-ad-slot="' + escapeHtml(slotId) + '" ' +
-        'data-ad-format="auto" data-full-width-responsive="true"></ins>' +
+        'data-ad-format="' + escapeHtml(fmt) + '"' + fwr + '></ins>' +
         '</div>';
 }
 
@@ -238,7 +241,7 @@ function displaySymbol(symbol, interpreterFilter) {
     html += "</article>";
 
     // إعلان داخل الصفحة
-    html += buildAdBlock(siteConfig.adsense.slots.inSymbol, "ad-middle");
+    html += buildAdBlock(siteConfig.adsense.slots.inSymbol, "ad-middle", "rectangle");
 
     // رموز ذات صلة (من نفس الحرف)
     const related = symbolsByLetter(data.letter).filter(([w]) => w !== symbol);
@@ -254,7 +257,7 @@ function displaySymbol(symbol, interpreterFilter) {
     }
 
     // إعلان قبل الفوتر
-    html += buildAdBlock(siteConfig.adsense.slots.beforeFooter, "ad-bottom");
+    html += buildAdBlock(siteConfig.adsense.slots.beforeFooter, "ad-bottom", "horizontal");
 
     container.innerHTML = html;
 
@@ -321,12 +324,12 @@ function displayLetter(letter) {
 
         // إعلان بعد كل 3 رموز (مع مراعاة حد أدسنس)
         if ((idx + 1) % 3 === 0 && idx !== symbols.length - 1) {
-            html += buildAdBlock(siteConfig.adsense.slots.everyThree, "ad-middle");
+            html += buildAdBlock(siteConfig.adsense.slots.everyThree, "ad-middle", "rectangle");
         }
     });
 
     // إعلان قبل الفوتر
-    html += buildAdBlock(siteConfig.adsense.slots.letterBeforeFooter, "ad-bottom");
+    html += buildAdBlock(siteConfig.adsense.slots.letterBeforeFooter, "ad-bottom", "horizontal");
 
     container.innerHTML = html;
 }
@@ -353,7 +356,7 @@ function displayAllLetters() {
     });
     html += "</div>";
 
-    html += buildAdBlock(siteConfig.adsense.slots.allLetters, "ad-middle");
+    html += buildAdBlock(siteConfig.adsense.slots.allLetters, "ad-middle", "rectangle");
     container.innerHTML = html;
 }
 
@@ -422,18 +425,74 @@ function injectJsonLd(symbol, count) {
 }
 
 /* ----------------------------------------------------------------
-   12) إعلان الجوال اللاصق + زر العودة للأعلى
+   12) إعلانات الجوال اللاصقة + أزرار إغلاق الإعلانات + زر العودة للأعلى
    ---------------------------------------------------------------- */
+
+/** إغلاق صندوق إعلان وإخفائه */
+function hideAdZone(zone) {
+    if (!zone) return;
+    zone.style.display = "none";
+    if (zone.classList.contains("ad-sticky-mobile")) {
+        document.body.classList.remove("has-sticky-ad");
+    }
+}
+
+/** مفتاح تخزين حالة الإغلاق للجلسة */
+function adCloseKey(zone) {
+    const slot = zone.getAttribute("data-ad-slot");
+    return slot ? "ad-closed:" + slot : null;
+}
+
+/** إغلاق الإعلان عند الضغط على زر ✕ */
+function closeAd(btn) {
+    const zone = btn.closest(".ad-zone, .sidebar-ad, .ad-sticky-mobile");
+    if (!zone) return;
+    hideAdZone(zone);
+    try {
+        const key = adCloseKey(zone);
+        if (key) sessionStorage.setItem(key, "1");
+    } catch (e) { /* تجاهل */ }
+}
+
+/** إضافة زر إغلاق (✕) لكل صناديق الإعلانات داخل نطاق معيّن */
+function setupAdCloseButtons(root) {
+    const scope = root || document;
+    scope.querySelectorAll(".ad-zone, .sidebar-ad, .ad-sticky-mobile").forEach(zone => {
+        if (zone.dataset.adDismissible === "1") return; // مضاف مسبقاً
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "ad-close";
+        btn.setAttribute("aria-label", "إغلاق الإعلان");
+        btn.setAttribute("title", "إغلاق الإعلان");
+        btn.textContent = "✕";
+        btn.addEventListener("click", function () { closeAd(this); });
+        zone.appendChild(btn);
+        zone.dataset.adDismissible = "1";
+    });
+}
+
+/** إخفاء الإعلانات التي أغلقها الزائر في هذه الجلسة */
+function restoreClosedAds() {
+    document.querySelectorAll(".ad-zone, .sidebar-ad, .ad-sticky-mobile").forEach(zone => {
+        try {
+            const key = adCloseKey(zone);
+            if (key && sessionStorage.getItem(key) === "1") hideAdZone(zone);
+        } catch (e) { /* تجاهل */ }
+    });
+}
+
 function setupStickyMobileAd() {
     if (!siteConfig.adsense.enabled) return;
     if (document.querySelector(".ad-sticky-mobile")) return;
     const div = document.createElement("div");
     div.className = "ad-sticky-mobile";
+    div.setAttribute("data-ad-slot", "stickyMobile");
+    div.setAttribute("data-ad-type", "horizontal");
     div.innerHTML = '<div class="ad-label">إعلان</div>' +
         '<ins class="adsbygoogle" style="display:block" ' +
         'data-ad-client="' + escapeHtml(siteConfig.adsense.client) + '" ' +
         'data-ad-slot="' + escapeHtml(siteConfig.adsense.slots.stickyMobile) + '" ' +
-        'data-ad-format="auto" data-full-width-responsive="true"></ins>';
+        'data-ad-format="horizontal"></ins>';
     document.body.appendChild(div);
     document.body.classList.add("has-sticky-ad");
     activateAds(div);
@@ -475,4 +534,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("letterContent")) {
         loadLetterPage();
     }
+
+    // إضافة أزرار إغلاق الإعلانات ثم تطبيق ما أغلقه الزائر سابقاً في الجلسة
+    setupAdCloseButtons(document);
+    restoreClosedAds();
 });

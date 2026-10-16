@@ -233,7 +233,8 @@ ul, ol { list-style: none; }
     );
     border-radius: var(--radius-md);
     border: 1px dashed var(--border-strong);
-    min-height: 100px;
+    min-height: 90px;
+    max-height: 340px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -241,9 +242,9 @@ ul, ol { list-style: none; }
     position: relative;
 }
 
-.ad-zone.ad-top { margin-top: 16px; margin-bottom: 24px; }
-.ad-zone.ad-middle { margin: 46px auto; }
-.ad-zone.ad-bottom { margin: 40px auto; }
+.ad-zone.ad-top { margin-top: 16px; margin-bottom: 24px; max-height: 180px; }
+.ad-zone.ad-middle { margin: 46px auto; max-height: 320px; }
+.ad-zone.ad-bottom { margin: 40px auto; max-height: 180px; }
 
 .ad-label {
     font-size: 0.68rem;
@@ -256,6 +257,52 @@ ul, ol { list-style: none; }
 
 /* العنصر ins قبل تحميل أدسنس لا يظهر إن كان فارغاً */
 .ad-zone ins.adsbygoogle { display: block; width: 100%; }
+
+/* صندوق إعلان قصير (بانر أفقي) لا يتجاوز حجماً مناسباً */
+.ad-zone[data-ad-type="horizontal"] { max-height: 170px; }
+
+/* عناصر الإعلان لا تتجاوز حدود صندوقها */
+.ad-zone ins.adsbygoogle,
+.sidebar-ad ins.adsbygoogle,
+.ad-sticky-mobile ins.adsbygoogle {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* ----------------------------------------------------------------
+   زر إغلاق الإعلان (✕) — يظهر في زاوية كل صندوق إعلاني
+   ---------------------------------------------------------------- */
+.ad-close {
+    position: absolute;
+    top: 6px;
+    inset-inline-start: 6px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--text-secondary);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 6;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.ad-close:hover,
+.ad-close:focus-visible {
+    background: #E8E2D9;
+    color: var(--text-primary);
+    outline: none;
+}
+.ad-close:active { transform: scale(0.92); }
 
 /* ----------------------------------------------------------------
    5) قسم الترحيب (Hero)
@@ -817,10 +864,13 @@ ul, ol { list-style: none; }
     padding: 12px;
     text-align: center;
     min-height: 250px;
+    max-height: 300px;
     border: 1px dashed var(--border-strong);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
+    position: relative;
 }
 
 .sidebar-widget {
