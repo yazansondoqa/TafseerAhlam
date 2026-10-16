@@ -1,0 +1,179 @@
+/* ================================================================
+   موقع تفسير الأحلام — التجاوب مع جميع الشاشات
+   ملف: css/responsive.css
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   شاشات متوسطة كبيرة (تابلت أفقي / لابتوب صغير)
+   ---------------------------------------------------------------- */
+@media (max-width: 1100px) {
+    .interpreters-grid { grid-template-columns: repeat(2, 1fr); }
+    .letter-page-wrapper { grid-template-columns: 1fr; }
+    .letter-sidebar {
+        position: static;
+        top: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .sidebar-ad { min-height: 120px; }
+    .hero-content h1 { font-size: 2.5rem; }
+}
+
+/* ----------------------------------------------------------------
+   تابلت
+   ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+    .footer-content { grid-template-columns: repeat(2, 1fr); }
+    .letter-sidebar { grid-template-columns: 1fr; }
+}
+
+/* ----------------------------------------------------------------
+   جوال
+   ---------------------------------------------------------------- */
+@media (max-width: 768px) {
+    body { font-size: 16px; line-height: 1.85; }
+
+    .navbar { padding: 10px 16px; flex-wrap: wrap; }
+
+    /* قائمة الجوال المنسدلة */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background: var(--accent-green);
+        padding: 16px;
+        gap: 4px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .nav-links.show { display: flex; }
+    .nav-links a { display: block; padding: 12px 16px; width: 100%; }
+
+    .mobile-menu-btn { display: block; }
+    .logo a { font-size: 1.2rem; }
+    .logo-icon { font-size: 1.4rem; }
+
+    .hero-section { padding: 46px 16px 56px; }
+    .hero-content h1 { font-size: 1.75rem; }
+    .hero-subtitle { font-size: 1rem; margin-bottom: 28px; }
+
+    .search-container input { padding: 15px 18px; font-size: 1rem; }
+    .search-container button { padding: 0 22px; font-size: 1.1rem; }
+
+    .quick-stats { gap: 26px; margin-top: 34px; }
+    .quick-stats .stat strong { font-size: 1.5rem; }
+
+    .interpreters-grid { grid-template-columns: 1fr; }
+    .interpreters-section,
+    .home-section { padding: 44px 16px; }
+
+    .section-header { margin-bottom: 32px; }
+    .section-header h2 { font-size: 1.6rem; }
+    .section-header p { font-size: 0.98rem; }
+
+    .letters-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .letter-btn { padding: 12px 4px; min-height: 64px; }
+    .letter-btn span { font-size: 1.4rem; }
+    .letter-btn small { font-size: 0.6rem; }
+
+    .letter-page-wrapper { padding: 18px 14px; gap: 22px; }
+    .letter-header { padding: 20px 14px; }
+    .letter-header .big-letter { font-size: 4rem; }
+
+    .letter-nav-strip { top: var(--header-h); }
+    .letter-nav-inner { padding: 8px 14px; }
+    .letter-nav-inner a { width: 34px; height: 34px; font-size: 1rem; }
+
+    .symbol-card { padding: 20px 18px; border-radius: 10px; }
+    .symbol-card h3 { font-size: 1.3rem; }
+    .interpretation { padding: 14px 16px; }
+    .interpretation p { font-size: 0.94rem; line-height: 1.95; }
+
+    .footer-content { grid-template-columns: 1fr; gap: 24px; }
+    .main-footer { padding: 40px 16px 20px; }
+
+    .ad-zone { margin: 20px 12px; min-height: 90px; }
+
+    .page-hero { padding: 38px 16px; }
+    .page-hero h1 { font-size: 1.7rem; }
+    .page-content { padding: 30px 14px 0; }
+    .page-content section { padding: 22px 18px; }
+
+    .back-to-top { inset-inline-start: 14px; bottom: 84px; }
+
+    /* ترك مسافة أسفل الصفحة حتى لا يحجب الإعلان اللاصق المحتوى */
+    body.has-sticky-ad { padding-bottom: 62px; }
+}
+
+/* ----------------------------------------------------------------
+   جوال صغير
+   ---------------------------------------------------------------- */
+@media (max-width: 420px) {
+    .letters-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero-content h1 { font-size: 1.5rem; }
+    .filter-btn { padding: 7px 13px; font-size: 0.82rem; }
+    .letter-nav-inner a { width: 32px; height: 32px; }
+    .quick-stats { gap: 18px; }
+}
+
+/* ----------------------------------------------------------------
+   إعلان لاصق أسفل شاشة الجوال (يُفعّل عبر إضافة الكلاس)
+   ---------------------------------------------------------------- */
+.ad-sticky-mobile {
+    display: none;
+}
+@media (max-width: 768px) {
+    .ad-sticky-mobile {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 6px;
+        text-align: center;
+        z-index: 999;
+        box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.12);
+        border-top: 1px solid var(--border-color);
+        min-height: 50px;
+    }
+    .ad-sticky-mobile .ad-label {
+        font-size: 0.58rem;
+        letter-spacing: 2px;
+        margin-bottom: 2px;
+    }
+}
+
+/* ----------------------------------------------------------------
+   احترام تفضيل تقليل الحركة (إمكانية وصول)
+   ---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* ----------------------------------------------------------------
+   وضع داكن تلقائي (اختياري — يتبع إعداد النظام)
+   ---------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+    /* يُترك معطّلاً افتراضياً للحفاظ على الهوية البصرية للموقع.
+       لإلغاء التعليق: اجعل القيم بلا تعليق. */
+    /*
+    :root {
+        --bg-primary: #12100E;
+        --bg-secondary: #1B1815;
+        --bg-white: #1F1B17;
+        --text-primary: #EDE7DF;
+        --text-secondary: #B5A99C;
+        --border-color: #2E2822;
+    }
+    */
+}
