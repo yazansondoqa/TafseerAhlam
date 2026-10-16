@@ -233,8 +233,8 @@ ul, ol { list-style: none; }
     );
     border-radius: var(--radius-md);
     border: 1px dashed var(--border-strong);
-    min-height: 90px;
-    max-height: 340px;
+    min-height: 80px;
+    max-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -242,9 +242,9 @@ ul, ol { list-style: none; }
     position: relative;
 }
 
-.ad-zone.ad-top { margin-top: 16px; margin-bottom: 24px; max-height: 180px; }
-.ad-zone.ad-middle { margin: 46px auto; max-height: 320px; }
-.ad-zone.ad-bottom { margin: 40px auto; max-height: 180px; }
+.ad-zone.ad-top { margin-top: 16px; margin-bottom: 24px; max-height: 120px; }
+.ad-zone.ad-middle { margin: 46px auto; max-height: 260px; }
+.ad-zone.ad-bottom { margin: 40px auto; max-height: 120px; }
 
 .ad-label {
     font-size: 0.68rem;
@@ -259,7 +259,7 @@ ul, ol { list-style: none; }
 .ad-zone ins.adsbygoogle { display: block; width: 100%; }
 
 /* صندوق إعلان قصير (بانر أفقي) لا يتجاوز حجماً مناسباً */
-.ad-zone[data-ad-type="horizontal"] { max-height: 170px; }
+.ad-zone[data-ad-type="horizontal"] { max-height: 120px; }
 
 /* عناصر الإعلان لا تتجاوز حدود صندوقها */
 .ad-zone ins.adsbygoogle,
