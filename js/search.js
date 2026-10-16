@@ -1,4 +1,4 @@
-/* ================================================================
+﻿/* ================================================================
    موقع تفسير الأحلام — محرك البحث الفوري
    ملف: js/search.js
    ----------------------------------------------------------------
@@ -60,13 +60,13 @@ function searchInDatabase(query, limit) {
 
 /** توجيه المستخدم إلى صفحة الرمز */
 function goToSymbol(word) {
-    window.location.href = "letter.html?symbol=" + encodeURIComponent(word);
+    window.location.href = "letter?symbol=" + encodeURIComponent(word);
 }
 
 /** بناء HTML لنتيجة بحث كرابط (يعمل بلوحة المفاتيح) */
 function resultItemHtml(r, index) {
     return '<a class="result-item" id="search-result-' + index + '" role="option"' +
-        ' href="letter.html?symbol=' + encodeURIComponent(r.word) + '">' +
+        ' href="letter?symbol=' + encodeURIComponent(r.word) + '">' +
         "<span>" + escapeHtml(r.word) + "</span>" +
         '<span class="badge">' + r.count + " تفسير</span></a>";
 }

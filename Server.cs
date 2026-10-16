@@ -61,6 +61,15 @@ class SimpleServer
         if (string.IsNullOrEmpty(urlPath))
             urlPath = "index.html";
 
+        // Translate clean URLs (e.g. "/letter") to their actual files ("letter.html")
+        if (!Path.HasExtension(urlPath) && !Directory.Exists(Path.Combine(root, urlPath)))
+        {
+            if (File.Exists(Path.Combine(root, urlPath + ".html")))
+                urlPath = urlPath + ".html";
+            else if (string.IsNullOrEmpty(urlPath))
+                urlPath = "index.html";
+        }
+
         string filePath = Path.Combine(root, urlPath);
 
         // Security: prevent path traversal

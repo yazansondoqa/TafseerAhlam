@@ -1,4 +1,4 @@
-/* ================================================================
+﻿/* ================================================================
    موقع تفسير الأحلام — المنطق الرئيسي
    ملف: js/app.js
    ----------------------------------------------------------------
@@ -147,7 +147,7 @@ function renderLetterNavStrip(activeLetter) {
     const strip = document.getElementById("letterNavStrip");
     if (!strip) return;
     strip.innerHTML = arabicLetters.map(l =>
-        '<a href="letter.html?letter=' + toSlug(l.char) + '"' +
+        '<a href="letter?letter=' + toSlug(l.char) + '"' +
         ' class="' + (l.char === activeLetter ? "active" : "") + '"' +
         ' title="حرف ' + escapeHtml(l.name) + '"' +
         ' aria-label="حرف ' + escapeHtml(l.name) + '">' + l.char + "</a>"
@@ -162,7 +162,7 @@ function renderPopularList() {
     if (!list) return;
     list.innerHTML = popularSymbols
         .filter(w => dreamDatabase[w])
-        .map(w => '<li><a href="letter.html?symbol=' + toSlug(w) + '">' + escapeHtml(w) + "</a></li>")
+        .map(w => '<li><a href="letter?symbol=' + toSlug(w) + '">' + escapeHtml(w) + "</a></li>")
         .join("");
 }
 
@@ -199,16 +199,16 @@ function displaySymbol(symbol, interpreterFilter) {
     document.title = "تفسير رؤية " + symbol + " في المنام — " + siteConfig.siteName;
     setMetaDescription("تفسير رؤية " + symbol + " في المنام عند ابن سيرين والنابلسي وابن شاهين والإمام جعفر الصادق. " +
         interpretationsCount + " تفسيرات لرؤية " + symbol + " في الحلم.");
-    setCanonical("letter.html?symbol=" + toSlug(symbol));
+    setCanonical("letter?symbol=" + toSlug(symbol));
     injectJsonLd(symbol, interpretationsCount);
 
     let html = "";
 
     // مسار التنقل
     html += '<nav class="breadcrumbs" aria-label="مسار التنقل">' +
-        '<a href="index.html">الرئيسية</a><span class="sep">›</span>' +
-        '<a href="letter.html">تصفح بالحروف</a><span class="sep">›</span>' +
-        '<a href="letter.html?letter=' + toSlug(data.letter) + '">حرف ' +
+        '<a href="/">الرئيسية</a><span class="sep">›</span>' +
+        '<a href="letter">تصفح بالحروف</a><span class="sep">›</span>' +
+        '<a href="letter?letter=' + toSlug(data.letter) + '">حرف ' +
         escapeHtml(letterInfo ? letterInfo.name : data.letter) + '</a>' +
         '<span class="sep">›</span><span>' + escapeHtml(symbol) + "</span></nav>";
 
@@ -247,7 +247,7 @@ function displaySymbol(symbol, interpreterFilter) {
             '<h2 style="font-size:1.5rem">رموز من نفس الحرف</h2></div>';
         html += '<div class="letters-grid">';
         related.forEach(([w]) => {
-            html += '<a href="letter.html?symbol=' + toSlug(w) + '" class="letter-btn">' +
+            html += '<a href="letter?symbol=' + toSlug(w) + '" class="letter-btn">' +
                 '<span style="font-size:1.05rem">' + escapeHtml(w) + "</span></a>";
         });
         html += "</div>";
@@ -277,13 +277,13 @@ function displayLetter(letter) {
     setMetaDescription("تصفح تفسيرات الأحلام والرؤى التي تبدأ بحرف " +
         (letterInfo ? letterInfo.name : letter) + ". " + symbols.length +
         " رمزاً مع تفسيرات ابن سيرين والنابلسي وابن شاهين والإمام جعفر الصادق.");
-    setCanonical("letter.html?letter=" + toSlug(letter));
+    setCanonical("letter?letter=" + toSlug(letter));
 
     let html = "";
 
     html += '<nav class="breadcrumbs" aria-label="مسار التنقل">' +
-        '<a href="index.html">الرئيسية</a><span class="sep">›</span>' +
-        '<a href="letter.html">تصفح بالحروف</a><span class="sep">›</span>' +
+        '<a href="/">الرئيسية</a><span class="sep">›</span>' +
+        '<a href="letter">تصفح بالحروف</a><span class="sep">›</span>' +
         "<span>حرف " + escapeHtml(letterInfo ? letterInfo.name : letter) + "</span></nav>";
 
     html += '<header class="letter-header">' +
@@ -314,7 +314,7 @@ function displayLetter(letter) {
                 "<p>" + escapeHtml(text) + "</p></div>";
         }
 
-        html += '<div style="margin-top:12px"><a class="btn btn-outline" style="margin-top:6px" href="letter.html?symbol=' +
+        html += '<div style="margin-top:12px"><a class="btn btn-outline" style="margin-top:6px" href="letter?symbol=' +
             toSlug(word) + '">صفحة الرمز المفردة</a></div>';
 
         html += "</article>";
@@ -338,7 +338,7 @@ function displayAllLetters() {
     const container = document.getElementById("letterContent");
 
     document.title = "تصفح تفسير الأحلام حسب الحروف الأبجدية — " + siteConfig.siteName;
-    setCanonical("letter.html");
+    setCanonical("letter");
 
     let html = '<header class="letter-header">' +
         '<div class="big-letter">أ — ي</div>' +
@@ -348,7 +348,7 @@ function displayAllLetters() {
 
     html += '<div class="letters-grid">';
     arabicLetters.forEach(l => {
-        html += '<a href="letter.html?letter=' + toSlug(l.char) + '" class="letter-btn">' +
+        html += '<a href="letter?letter=' + toSlug(l.char) + '" class="letter-btn">' +
             "<span>" + l.char + "</span><small>" + countByLetter(l.char) + " رمز</small></a>";
     });
     html += "</div>";
@@ -411,7 +411,7 @@ function injectJsonLd(symbol, count) {
         "about": symbol,
         "description": "تفسير رؤية " + symbol + " في المنام عند " +
             Object.values(interpreters).map(i => i.shortName).join(" و") + ".",
-        "url": base + "/letter.html?symbol=" + toSlug(symbol),
+        "url": base + "/letter?symbol=" + toSlug(symbol),
         "publisher": { "@type": "Organization", "name": siteConfig.siteName }
     };
     const s = document.createElement("script");
