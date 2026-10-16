@@ -25,8 +25,8 @@ const siteConfig = {
        ضع هنا معرّف الناشر الخاص بك بعد قبول الموقع.
        اتركه فارغاً "" لتعطيل كل الإعلانات (سيظهر نائب + عناصر نائبة). */
     adsense: {
-        enabled: false,
-        client: "ca-pub-XXXXXXXXXXXXXXXX", // ← استبدله بمعرّفك
+        enabled: true,
+        client: "ca-pub-4532516391740793", // ← استبدله بمعرّفك
         slots: {
             header:     "1111111111", // إعلان علوي — كل الصفحات
             homeMiddle: "2222222222", // داخلي 1 — الرئيسية
@@ -44,7 +44,7 @@ const siteConfig = {
 
     /* بيانات التواصل — استبدلها ببياناتك الحقيقية */
     contact: {
-        email: "info@example.com",
+        email: "tafseerahlam@gmail.com",
         responseTime: "خلال 48 ساعة عمل"
     }
 };
