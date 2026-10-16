@@ -4,3 +4,7 @@
 Server.cs
 Server.ps1
 wrangler.toml
+
+data_prefix.js
+data_patch.js
+
