@@ -96,13 +96,16 @@
     .footer-content { grid-template-columns: 1fr; gap: 24px; }
     .main-footer { padding: 40px 16px 20px; margin-top: 34px; }
 
-    .ad-zone { margin: 12px 8px; padding: 6px; min-height: 50px; max-height: 240px; }
+    /* الجوال: كل الإعلانات بانرات قصيرة بارتفاع موحّد */
+    .ad-zone { margin: 12px 8px; padding: 6px; min-height: 50px; max-height: 100px; }
     .ad-zone.ad-top { margin-top: 8px; margin-bottom: 10px; max-height: 100px; }
-    .ad-zone.ad-middle { margin: 16px 8px; max-height: 250px; }
+    .ad-zone.ad-middle { margin: 16px 8px; max-height: 100px; }
     .ad-zone.ad-bottom { margin: 14px 8px; max-height: 100px; }
     .ad-zone[data-ad-type="horizontal"] { max-height: 100px; }
+    .ad-zone ins.adsbygoogle { max-height: 88px; overflow: hidden; }
 
-    .sidebar-ad { min-height: 70px; max-height: 250px; padding: 8px; }
+    .sidebar-ad { min-height: 50px; max-height: 100px; padding: 8px; }
+    .sidebar-ad ins.adsbygoogle { max-height: 88px; overflow: hidden; }
 
     .ad-close {
         width: 20px;
@@ -117,10 +120,10 @@
     .page-content { padding: 30px 14px 0; }
     .page-content section { padding: 22px 18px; }
 
-    .back-to-top { inset-inline-start: 14px; bottom: 60px; }
+    .back-to-top { inset-inline-start: 14px; bottom: 52px; }
 
     /* ترك مسافة أسفل الصفحة حتى لا يحجب الإعلان اللاصق المحتوى */
-    body.has-sticky-ad { padding-bottom: 58px; }
+    body.has-sticky-ad { padding-bottom: 50px; }
 }
 
 /* ----------------------------------------------------------------
@@ -148,13 +151,13 @@
         left: 0;
         right: 0;
         background: #fff;
-        padding: 3px 6px;
+        padding: 2px 5px;
         text-align: center;
         z-index: 999;
         box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
         border-top: 1px solid var(--border-color);
-        min-height: 34px;
-        max-height: 50px;
+        min-height: 30px;
+        max-height: 44px;
         overflow: hidden;
     }
     .ad-sticky-mobile .ad-label {
@@ -162,7 +165,7 @@
         letter-spacing: 1px;
         margin-bottom: 0;
     }
-    .ad-sticky-mobile ins.adsbygoogle { max-height: 38px; overflow: hidden; }
+    .ad-sticky-mobile ins.adsbygoogle { max-height: 34px; overflow: hidden; }
     .ad-sticky-mobile .ad-close {
         top: 2px;
         inset-inline-start: 2px;

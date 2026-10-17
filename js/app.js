@@ -71,12 +71,18 @@ function loadAdsenseScript() {
     document.head.appendChild(s);
 }
 
+/** هل الزائر على شاشة جوال؟ (نقصّر كل الإعلانات إلى بانرات قصيرة) */
+function isMobileAdViewport() {
+    return window.innerWidth <= 768;
+}
+
 /** بناء كتلة إعلان (نائب إن كانت الإعلانات معطّلة، أو عنصر ins إن كانت مفعّلة)
- *  format: "horizontal" للبانرات القصيرة، "rectangle" للمحتوى، "auto" الافتراضي */
+ *  format: "horizontal" للبانرات القصيرة، "rectangle" للمحتوى، "auto" الافتراضي.
+ *  على الجوال نفرض "horizontal" دائماً حتى تكون كل الإعلانات بانرات قصيرة. */
 function buildAdBlock(slotId, extraClass, format) {
     const cls = "ad-zone " + (extraClass || "");
     const label = '<div class="ad-label">إعلان</div>';
-    const fmt = format || "auto";
+    const fmt = isMobileAdViewport() ? "horizontal" : (format || "auto");
     const fwr = fmt === "auto" ? ' data-full-width-responsive="true"' : "";
 
     if (!siteConfig.adsense.enabled) {
@@ -98,8 +104,16 @@ function buildAdBlock(slotId, extraClass, format) {
 function activateAds(root) {
     if (!siteConfig.adsense.enabled) return;
     const scope = root || document;
+    const mobile = isMobileAdViewport();
     scope.querySelectorAll("ins.adsbygoogle").forEach(ins => {
         if (ins.getAttribute("data-adsbygoogle-status")) return; // مُعالَج مسبقاً
+        if (mobile) {
+            // فرض بانر قصير على الجوال لكل الوحدات (بما فيها الثابتة في HTML)
+            ins.setAttribute("data-ad-format", "horizontal");
+            ins.removeAttribute("data-full-width-responsive");
+            const zone = ins.closest(".ad-zone, .sidebar-ad, .ad-sticky-mobile");
+            if (zone) zone.setAttribute("data-ad-type", "horizontal");
+        }
         try {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         } catch (e) {
