@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: http://localhost:8080/sitemap.xml
+Sitemap: https://tafseerahlam.pages.dev/sitemap.xml
