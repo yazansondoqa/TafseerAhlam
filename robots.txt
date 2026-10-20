@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: https://tafseerahlam.pages.dev/sitemap.xml
+Sitemap: https://www.tafseerahlam.store/sitemap.xml
