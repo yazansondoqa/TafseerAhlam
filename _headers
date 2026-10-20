@@ -1,6 +1,5 @@
 # ================================================================
-# Cloudflare _headers — ترويسات الأمان والأداء
-# يُقرأ تلقائياً عند النشر على Cloudflare Pages
+# رؤوس HTTP — تُطبَّق تلقائياً على كل الصفحات عند النشر على Cloudflare Pages
 # ================================================================
 
 /*
@@ -11,12 +10,24 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 
-# تخزين مؤقت للملفات الثابتة
+# ملف ads.txt — يجب أن يُقدَّم كنص عادي دون تخزين مؤقت
+/ads.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
+
+# ملف robots.txt
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
+
+# الأصول الثابتة — تخزين طويل
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# CSS — تحقق دائم حتى تظهر التعديلات
 /css/*
   Cache-Control: public, max-age=0, must-revalidate
 
+# JS — تحقق دائم حتى تظهر التعديلات
 /js/*
   Cache-Control: public, max-age=0, must-revalidate
