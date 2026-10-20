@@ -36,6 +36,26 @@
         <priority>0.3</priority>
     </url>
     <url>
+        <loc>https://www.tafseerahlam.store/articles</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.tafseerahlam.store/article-how-to-interpret</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.tafseerahlam.store/article-ibn-sirin-method</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.tafseerahlam.store/article-common-symbols</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://www.tafseerahlam.store/letter?letter=%D8%A3</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
