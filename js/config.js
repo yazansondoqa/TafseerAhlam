@@ -43,20 +43,13 @@ const siteConfig = {
 };
 
 /* ----------------------------------------------------------------
-   تحميل سكربت AdSense تلقائياً بعد التأكد من الإعدادات.
-   لا تعدّل هذا الجزء — فهو يتحقق من وجود المعرّف قبل التحميل.
+   تعريف مصفوفة إعلانات AdSense.
+   السكربت موجود بشكل ثابت داخل <head> في كل الصفحات،
+   لذلك لا نضيفه مرة أخرى هنا حتى لا يتكرر تحميله مرتين.
    ---------------------------------------------------------------- */
 (function () {
     var a = siteConfig.adsense;
     if (!a || !a.enabled || !a.client || a.client.indexOf("XXXXXXXX") !== -1) return;
 
     window.adsbygoogle = window.adsbygoogle || [];
-
-    var s = document.createElement("script");
-    s.async = true;
-    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" +
-        encodeURIComponent(a.client);
-    s.crossOrigin = "anonymous";
-    s.setAttribute("data-adsense-loader", "1");
-    (document.head || document.documentElement).appendChild(s);
 })();
