@@ -18,12 +18,16 @@
     --text-muted: #8C7B6D;
 
     /* الأخضر الإسلامي + الذهبي */
-    --accent-green: #1B4332;
-    --accent-green-light: #2D6A4F;
-    --accent-green-soft: #40916C;
-    --accent-gold: #C9A227;
-    --accent-gold-dark: #A8891F;
-    --accent-gold-soft: #FDF8EE;
+    --accent-green: #059669;
+    --accent-green-light: #10B981;
+    --accent-green-soft: #34D399;
+    --accent-gold: #FFD700;
+    --accent-gold-dark: #F4A460;
+    --accent-gold-soft: #FFF8DC;
+
+    /* الأحمر للسحوبات والعناوين الطارئة */
+    --accent-red: #DC2626;
+    --accent-red-light: #EF4444;
 
     /* ألوان المفسّرين الأربعة */
     --ibn-sirin: #2D6A4F;
@@ -127,7 +131,7 @@ ul, ol { list-style: none; }
     right: -9999px;
     top: 0;
     background: var(--accent-gold);
-    color: #1B4332;
+    color: #059669;
     padding: 12px 20px;
     z-index: 2000;
     font-weight: 700;
@@ -148,7 +152,7 @@ ul, ol { list-style: none; }
    3) شريط التنقل الرئيسي
    ---------------------------------------------------------------- */
 .main-header {
-    background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+    background: linear-gradient(135deg, #059669 0%, #10B981 100%);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -178,7 +182,7 @@ ul, ol { list-style: none; }
 }
 .logo-icon {
     font-size: 1.7rem;
-    filter: drop-shadow(0 0 8px rgba(201, 162, 39, 0.6));
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
 }
 
 .nav-links {
@@ -283,7 +287,7 @@ ul, ol { list-style: none; }
     padding: 0;
     border: 1px solid var(--border-strong);
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.96);
+    background: #E8E2D9;
     color: var(--text-secondary);
     font-family: Arial, sans-serif;
     font-size: 13px;
@@ -308,7 +312,7 @@ ul, ol { list-style: none; }
    5) قسم الترحيب (Hero)
    ---------------------------------------------------------------- */
 .hero-section {
-    background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #40916C 100%);
+    background: linear-gradient(135deg, #059669 0%, #10B981 50%, #047857 100%);
     padding: 72px 20px 84px;
     text-align: center;
     color: #fff;
@@ -321,7 +325,7 @@ ul, ol { list-style: none; }
     position: absolute;
     inset: 0;
     background-image:
-        radial-gradient(circle at 18% 28%, rgba(201, 162, 39, 0.16) 0%, transparent 52%),
+        radial-gradient(circle at 18% 28%, rgba(255, 215, 0, 0.16) 0%, transparent 52%),
         radial-gradient(circle at 82% 72%, rgba(255, 255, 255, 0.09) 0%, transparent 50%);
     pointer-events: none;
 }
@@ -588,8 +592,8 @@ ul, ol { list-style: none; }
     border: none;
 }
 .btn:hover { background: var(--accent-green-light); transform: translateY(-2px); }
-.btn.btn-gold { background: var(--accent-gold); }
-.btn.btn-gold:hover { background: var(--accent-gold-dark); }
+.btn.btn-gold { background: var(--accent-gold); color: #2B1F17; }
+.btn.btn-gold:hover { background: var(--accent-gold-dark); color: #2B1F17; }
 .btn.btn-outline {
     background: transparent;
     color: var(--accent-green);
@@ -725,7 +729,7 @@ ul, ol { list-style: none; }
     color: var(--accent-green);
     line-height: 1;
     margin-bottom: 10px;
-    text-shadow: 0 4px 20px rgba(27, 67, 50, 0.12);
+    text-shadow: 0 4px 20px rgba(5, 150, 105, 0.12);
 }
 .letter-header .letter-name {
     font-size: 1.3rem;
@@ -901,7 +905,7 @@ ul, ol { list-style: none; }
    12) الفوتر
    ---------------------------------------------------------------- */
 .main-footer {
-    background: #142e22;
+    background: #047857;
     color: rgba(255, 255, 255, 0.78);
     padding: 54px 20px 24px;
     margin-top: 56px;
@@ -940,7 +944,7 @@ ul, ol { list-style: none; }
    13) صفحات المحتوى الثابت (عن الموقع / سياسة الخصوصية...)
    ---------------------------------------------------------------- */
 .page-hero {
-    background: linear-gradient(135deg, #1B4332, #2D6A4F);
+    background: linear-gradient(135deg, #059669, #10B981);
     color: #fff;
     text-align: center;
     padding: 52px 20px;
@@ -1149,9 +1153,14 @@ ul, ol { list-style: none; }
     margin-bottom: 14px;
 }
 .alert-info {
-    background: #EAF4EF;
-    border-inline-start: 4px solid var(--accent-green-light);
-    color: var(--accent-green);
+    background: #DC2626;
+    border-inline-start: 4px solid var(--accent-red-light);
+    color: #fff;
+}
+.alert-error {
+    background: #DC2626;
+    border-inline-start: 4px solid var(--accent-red-light);
+    color: #fff;
 }
 
 /* ----------------------------------------------------------------
