@@ -257,6 +257,13 @@ function displaySymbol(symbol, interpreterFilter) {
     // إعلان داخل الصفحة
     html += buildAdBlock(siteConfig.adsense.slots.inSymbol, "ad-middle", "rectangle");
 
+    // زر الحفظ + المشاركات
+    html += '<div id="bookmarkBox" style="margin:12px 0;text-align:center"></div>';
+    html += '<div style="margin-top:8px;padding:10px;border-top:1px dashed var(--border-color);display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+        '<button onclick="shareSymbol(\'' + escapeHtml(symbol) + '\')" aria-label="مشاركة" style="background:var(--accent-green);color:#fff;padding:6px 14px;border-radius:var(--radius-pill);border:none;cursor:pointer;font-family:inherit;font-weight:600">📤 مشاركة</button>' +
+        '<button onclick="toggleBookmark(\'' + escapeHtml(symbol) + '\')" aria-label="حفظ" style="background:var(--accent-gold);color:#2B1F17;padding:6px 14px;border-radius:var(--radius-pill);border:none;cursor:pointer;font-family:inherit;font-weight:600">☆ حفظ</button>' +
+        '</div>';
+
     // رموز ذات صلة (من نفس الحرف)
     const related = symbolsByLetter(data.letter).filter(([w]) => w !== symbol);
     if (related.length > 0) {
