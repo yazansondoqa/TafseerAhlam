@@ -21,17 +21,17 @@ const siteConfig = {
         enabled: true,
         client: "ca-pub-4532516391740793", // معرّف الناشر
         slots: {
-            header:     "2360733089", // أعلى الصفحة — جميع الصفحات (وحدة حقيقية)
-            homeMiddle: "2360733089",
-            footer:     "2360733089",
-            sidebar1:   "2360733089",
-            sidebar2:   "2360733089",
-            inSymbol:   "2360733089",
-            beforeFooter:"2360733089",
-            everyThree: "2360733089",
-            letterBeforeFooter: "2360733089",
-            allLetters: "2360733089",
-            stickyMobile: "2360733089"
+            header:     "2360733089", /* ← header unit (تك 1) */
+            homeMiddle: "PASTE_HOME_SLOT", /* ← home middle unit (تك 2) */
+            footer:     "PASTE_FOOTER_SLOT", /* ← footer unit (تك 3) */
+            sidebar1:   "PASTE_SIDEBAR1_SLOT", /* ← sidebar 1 (تك 4) */
+            sidebar2:   "PASTE_SIDEBAR2_SLOT", /* ← sidebar 2 (تك 5) */
+            inSymbol:   "PASTE_SYMBOL_SLOT", /* ← symbol page (تك 6) */
+            beforeFooter:"PASTE_BEFOREFOOTER_SLOT", /* ← before footer (تك 7) */
+            everyThree: "PASTE_EVERY3_SLOT", /* ← every 3 symbols (تك 8) */
+            letterBeforeFooter: "PASTE_LETTERFOOTER_SLOT", /* ← letter page (تك 9) */
+            allLetters: "PASTE_ALLLETTERS_SLOT", /* ← all letters (تك 10) */
+            stickyMobile: "PASTE_MOBILE_SLOT" /* ← sticky mobile (تك 11) */
         }
     },
 
