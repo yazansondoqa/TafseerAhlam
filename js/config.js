@@ -38,7 +38,13 @@ const siteConfig = {
     /* بيانات التواصل — تظهر في صفحة اتصل بنا */
     contact: {
         email: "tafseerahlam@gmail.com",
-        responseTime: "خلال 48 ساعة عمل"
+        responseTime: "خلال 48 ساعة عمل",
+        /* خدمة إرسال النماذج بدون خادم (FormSubmit).
+           يجب تأكيد عنوان البريد مرة واحدة عند أول رسالة تصل. */
+        formEndpoint: "https://formsubmit.co/ajax/tafseerahlam@gmail.com",
+        /* مفتاح reCAPTCHA v3 (الموقع) — اتركه فارغاً حتى تضيفه من لوحة Google.
+           عند إضافته يُحمَّل السكربت ويُرسل الرمز مع النموذج تلقائياً. */
+        recaptchaSiteKey: ""
     }
 };
 

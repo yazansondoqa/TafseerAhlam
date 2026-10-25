@@ -146,4 +146,13 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!box) return;
         if (!box.contains(e.target) && e.target !== input) box.innerHTML = "";
     });
+
+    // دعم الوصول من شريط البحث اللاصق: /?q=كلمة
+    const params = new URLSearchParams(window.location.search);
+    const initialQuery = (params.get("q") || "").trim();
+    if (initialQuery.length >= 2) {
+        input.value = initialQuery;
+        liveSearch(initialQuery);
+        input.focus();
+    }
 });

@@ -142,12 +142,15 @@ function loadLetterPage() {
     const letter = params.get("letter");
     const symbol = params.get("symbol");
     const interpreterFilter = params.get("interpreter");
+    const category = params.get("category");
 
     renderLetterNavStrip(letter);
     renderPopularList();
 
     if (symbol && dreamDatabase[symbol]) {
         displaySymbol(symbol, interpreterFilter);
+    } else if (category) {
+        displayCategory(category);
     } else if (letter) {
         displayLetter(letter);
     } else {
@@ -280,6 +283,9 @@ function displaySymbol(symbol, interpreterFilter) {
     // إعلان قبل الفوتر
     html += buildAdBlock(siteConfig.adsense.slots.beforeFooter, "ad-bottom", "horizontal");
 
+    // التحليل الموسع للرمز (content layer)
+    html += buildDeepContent(symbol);
+
     container.innerHTML = html;
 
     if (interpreterFilter && interpreters[interpreterFilter]) {
@@ -289,10 +295,120 @@ function displaySymbol(symbol, interpreterFilter) {
 }
 
 /* ----------------------------------------------------------------
+   7.2) التحليل الموسع للرموز
+   ---------------------------------------------------------------- */
+function buildDeepContent(symbol) {
+    const deep = window.deepInterpretations || {};
+    const data = deep[symbol];
+    if (!data) return "";
+    let html = '<section class="deep-content" aria-label="التحليل الموسع">';
+    html += '<div class="section-header" style="margin-top:44px"><h2 style="font-size:1.6rem">التحليل الموسّع لرمز ' +
+        escapeHtml(symbol) + "</h2></div>";
+    const sections = [
+        { key: "intro", title: "مقدمة" },
+        { key: "psych", title: "قراءة نفسية" },
+        { key: "culture", title: "في التراث والثقافة" },
+        { key: "sharia", title: "منظور شرعي" },
+        { key: "modern", title: "قراءة معاصرة" },
+        { key: "practical", title: "نصائح عملية" },
+        { key: "summary", title: "خلاصة" }
+    ];
+    for (const sec of sections) {
+        if (data[sec.key]) {
+            html += '<article class="deep-section"><h3>' + sec.title +
+                '</h3><p>' + escapeHtml(data[sec.key]).replace(/\n/g, "<br>") + "</p></article>";
+        }
+    }
+    html += "</section>";
+    return html;
+}
+
+/* ----------------------------------------------------------------
+   7.5) عرض قسم من تصنيفات الأحلام
+   ---------------------------------------------------------------- */
+function getCategorySymbols(cat) {
+    const out = [];
+    for (const [word, data] of Object.entries(dreamDatabase)) {
+        const text = word + " " + Object.values(data.interpretations).join(" ");
+        if (cat.keywords.some(k => text.indexOf(k) !== -1)) out.push([word, data]);
+    }
+    return out.sort((a, b) => a[0].localeCompare(b[0], "ar"));
+}
+
+function injectCategoryJsonLd(cat, count) {
+    const old = document.getElementById("category-jsonld");
+    if (old) old.remove();
+    const base = siteConfig.siteUrl.replace(/\/$/, "");
+    const data = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "قسم " + cat.name + " — تفسير الأحلام",
+        "inLanguage": "ar",
+        "description": "تصفح " + count + " رمزاً من رموز " + cat.name + " في المنام مع تفسيرات ابن سيرين والنابلسي وابن شاهين والإمام جعفر الصادق.",
+        "url": base + "/letter?category=" + encodeURIComponent(cat.id),
+        "isPartOf": { "@type": "WebSite", "name": siteConfig.siteName, "url": base + "/" },
+        "publisher": { "@type": "Organization", "name": siteConfig.siteName }
+    };
+    const s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.id = "category-jsonld";
+    s.textContent = JSON.stringify(data);
+    document.head.appendChild(s);
+}
+
+function displayCategory(categoryId) {
+    const container = document.getElementById("letterContent");
+    const cats = window.dreamCategories || [];
+    const cat = cats.find(c => c.id === categoryId);
+    if (!cat) { displayAllLetters(); return; }
+
+    const symbols = getCategorySymbols(cat);
+
+    document.title = "تفسير الأحلام — قسم " + cat.name + " — " + siteConfig.siteName;
+    setMetaDescription("تفسير رؤية رموز " + cat.name + " في المنام: " + symbols.length +
+        " رمزاً مع تفسيرات ابن سيرين والنابلسي وابن شاهين والإمام جعفر الصادق.");
+    setCanonical("letter?category=" + encodeURIComponent(cat.id));
+    injectCategoryJsonLd(cat, symbols.length);
+
+    let html = '<nav class="breadcrumbs" aria-label="مسار التنقل">' +
+        '<a href="/">الرئيسية</a><span class="sep">›</span>' +
+        '<a href="categories">تصنيفات الأحلام</a><span class="sep">›</span>' +
+        "<span>" + escapeHtml(cat.name) + "</span></nav>";
+
+    html += '<header class="letter-header">' +
+        '<div class="big-letter" style="font-size:2.6rem">' + cat.icon + "</div>" +
+        '<h1 class="letter-name">قسم ' + escapeHtml(cat.name) + "</h1>" +
+        '<div class="letter-count">' + symbols.length + " رمزاً في هذا القسم</div>" +
+        "</header>";
+
+    html += '<p class="category-intro" style="max-width:820px;margin:0 auto 22px;text-align:center;line-height:1.95;color:var(--text-secondary)">' +
+        "يجمع هذا القسم رموز " + escapeHtml(cat.name) + " التي تظهر كثيراً في المنام، ويعرض تفسيرها " +
+        "عند ابن سيرين وعبد الغني النابلسي وابن شاهين الظاهري والإمام جعفر الصادق. " +
+        "اختر الرمز الذي رأيته في حلمك لعرض تفسيره المفصّل، أو استخدم البحث للوصول السريع.</p>";
+
+    if (symbols.length === 0) {
+        html += '<p style="text-align:center;padding:40px;color:var(--text-secondary)">' +
+            "لا توجد رموز متاحة لهذا القسم حالياً.</p>";
+        container.innerHTML = html;
+        return;
+    }
+
+    html += '<div class="letters-grid">';
+    symbols.slice(0, 150).forEach(([word]) => {
+        html += '<a href="letter?symbol=' + toSlug(word) + '" class="letter-btn">' +
+            "<span>" + escapeHtml(word) + "</span></a>";
+    });
+    html += "</div>";
+
+    html += buildAdBlock(siteConfig.adsense.slots.letterBeforeFooter, "ad-bottom", "horizontal");
+
+    container.innerHTML = html;
+}
+
+/* ----------------------------------------------------------------
    8) عرض جميع رموز حرف
    ---------------------------------------------------------------- */
-function displayLetter(letter) {
-    const container = document.getElementById("letterContent");
+function displayLetter(letter) {    const container = document.getElementById("letterContent");
     const letterInfo = arabicLetters.find(l => l.char === letter);
     const symbols = symbolsByLetter(letter);
 
@@ -433,6 +549,9 @@ function injectJsonLd(symbol, count) {
         "headline": "تفسير رؤية " + symbol + " في المنام",
         "inLanguage": "ar",
         "about": symbol,
+        "author": {"@type":"Person","name":"محمد بن سيرين وآخرون"},
+        "datePublished": "2024-01-15",
+        "dateModified": "2026-10-24",
         "description": "تفسير رؤية " + symbol + " في المنام عند " +
             Object.values(interpreters).map(i => i.shortName).join(" و") + ".",
         "url": base + "/letter?symbol=" + toSlug(symbol),

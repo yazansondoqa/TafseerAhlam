@@ -1,14 +1,16 @@
-﻿<!DOCTYPE html>
-<html lang="ar" dir="rtl">`n<head>`
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-    <meta name="google-adsense-account" content="ca-pub-4532516391740793">
+    <script data-theme-init="1">try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}</script>
+<meta name="google-adsense-account" content="ca-pub-4532516391740793">
     
-    <meta charset="UTF-8">`n    <meta name="hreflang" content="ar">`n    <meta name="hreflang" content="ar">
+    <meta charset="UTF-8">
+    <meta name="hreflang" content="ar">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فسر حلمك</title>
     <meta name="description" content="تواصل مع فريق موقع فسر حلمك.">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#1B4332">
+    <meta name="theme-color" content="#1A1815">
     <link rel="canonical" href="https://www.tafseerahlam.store/contact">
 
     <meta property="og:type" content="website">
@@ -21,16 +23,19 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/features.css">
 
     <script src="js/config.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4532516391740793" crossorigin="anonymous" data-adsense-loader="1"></script>
 
     <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <amp-auto-ads type="adsense" data-ad-client="ca-pub-4532516391740793"></amp-auto-ads>
@@ -78,38 +83,57 @@
                 <li><strong>زمن الرد المتوقع:</strong> خلال 48 ساعة عمل.</li>
             </ul>
             <div class="alert alert-info">
-                ملاحظة: هذا الموقع ثابت (Static) ولا يملك خادماً يعالج النماذج، لذلك عند الضغط على زر الإرسال سيُفتح برنامج البريد لديك مع رسالة جاهزة لإكمال الإرسال. يمكنك مراسلتنا مباشرة عبر البريد أعلاه أيضاً.
+                يُرسل النموذج مباشرة إلى بريد الموقع عبر خدمة آمنة. عند تعذّر الإرسال الآلي سيظهر لك رابط بديل لفتح برنامج البريد وإكمال الإرسال. يمكنك مراسلتنا مباشرة عبر البريد أعلاه في أي وقت.
             </div>
         </section>
 
         <section>
-            <h2>أرسل رسالتك</h2>
-            <form class="contact-form" onsubmit="return sendContactMessage(event)">
-                <div>
-                    <label for="contactName">الاسم</label>
-                    <input type="text" id="contactName" required placeholder="اكتب اسمك">
+            <h2>اسأل عن حلمك</h2>
+            <p>اكتب وصفاً واضحاً لما رأيته في المنام، واذكر التفاصيل المهمة (المكان، الأشخاص، الشعور). لا ترسل بيانات شخصية حساسة، ولا تعتبر الإجابة فتوى أو تشخيصاً طبياً.</p>
+            <form class="ask-form" id="askForm" novalidate>
+                <div class="form-row">
+                    <div>
+                        <label for="askName">الاسم (اختياري)</label>
+                        <input type="text" id="askName" name="name" autocomplete="name" placeholder="اكتب اسمك">
+                    </div>
+                    <div>
+                        <label for="askEmail">بريدك الإلكتروني (اختياري)</label>
+                        <input type="email" id="askEmail" name="email" dir="ltr" autocomplete="email" placeholder="example@mail.com">
+                    </div>
                 </div>
                 <div>
-                    <label for="contactEmail">بريدك الإلكتروني</label>
-                    <input type="email" id="contactEmail" required placeholder="example@mail.com" dir="ltr">
-                </div>
-                <div>
-                    <label for="contactSubject">الموضوع</label>
-                    <select id="contactSubject">
-                        <option>استفسار عام</option>
-                        <option>اقتراح إضافة رمز</option>
-                        <option>ملاحظة على محتوى</option>
-                        <option>بلاغ تقني</option>
+                    <label for="askCategory">نوع الحلم</label>
+                    <select id="askCategory" name="category">
+                        <option>حيوانات</option>
+                        <option>ماء وسوائل</option>
+                        <option>موت وحياة</option>
+                        <option>طيران وسماء</option>
+                        <option>أسنان وجسد</option>
+                        <option>ثعابين وزواحف</option>
+                        <option>حمل وأولاد</option>
+                        <option>مال وتجارة</option>
+                        <option>منزل وسكن</option>
+                        <option>عائلة وأقارب</option>
+                        <option>طعام وشراب</option>
+                        <option>ملابس وزينة</option>
+                        <option>دين وعبادة</option>
+                        <option>سفر وتنقل</option>
+                        <option>نباتات وأشجار</option>
+                        <option>مشاعر وحالات</option>
                         <option>أخرى</option>
                     </select>
                 </div>
                 <div>
-                    <label for="contactMessage">رسالتك</label>
-                    <textarea id="contactMessage" required placeholder="اكتب رسالتك هنا..."></textarea>
+                    <label for="askDream">وصف الحلم <span style="color:var(--accent-red)">*</span></label>
+                    <textarea id="askDream" name="dream" required minlength="20" maxlength="2000" placeholder="مثال: رأيت أني أمشي على ماء صافٍ، ثم ظهرت سمكة ذهبية..."></textarea>
                 </div>
+                <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <input type="hidden" name="started_at" id="askStartedAt" value="">
                 <div>
-                    <button type="submit" class="btn btn-gold">إرسال الرسالة</button>
+                    <button type="submit" class="btn btn-gold" id="askSubmit">إرسال السؤال</button>
                 </div>
+                <div class="form-status" id="askStatus" role="status" aria-live="polite"></div>
+                <p class="form-note">بإرسالك السؤال توافق على <a href="privacy">سياسة الخصوصية</a>. تُستخدم رسالتك للرد عليك فقط، وقد تُنشر إجابة عامة دون ذكر بياناتك.</p>
             </form>
         </section>
 
@@ -142,6 +166,16 @@
             <h4>إخلاء المسؤولية</h4>
             <p>المحتوى لأغراض تعليمية فقط. تفسير الأحلام اجتهاد بشري.</p>
         </div>
+    
+        <div class="footer-section">
+            <h4>استكشف</h4>
+            <ul>
+                <li><a href="quran-index">فهرس القرآن والحديث</a></li>
+                <li><a href="dream-journal">مفكرة الأحلام</a></li>
+                <li><a href="videos">مكتبة الفيديو</a></li>
+                <li><a href="categories">تصنيفات الأحلام</a></li>
+            </ul>
+        </div>
     </div>
     <div class="footer-bottom"><p>© 2026 فسر حلمك — جميع الحقوق محفوظة</p></div>
 </footer>
@@ -152,31 +186,161 @@
     <script src="js/data_extra.js"></script>
     <script src="js/data_v2.js"></script>
     <script src="js/data_v3.js"></script>
-<script src="js/bookmark_feature.js"></script>`n    <script src="js/app.js"></script>
+<script src="js/bookmark_feature.js"></script>
+    <script src="js/app.js"></script>
 <script src="js/search.js"></script>
 
 <script>
-/* إرسال نموذج الاتصال عبر البريد (موقع ثابت بلا خادم) */
-function sendContactMessage(e) {
-    e.preventDefault();
-    var name = document.getElementById('contactName').value.trim();
-    var email = document.getElementById('contactEmail').value.trim();
-    var subject = document.getElementById('contactSubject').value;
-    var message = document.getElementById('contactMessage').value.trim();
+/* ----------------------------------------------------------------
+   نموذج "اسأل عن حلمك":
+   - مصيدة روبوتات (honeypot) + شرط زمني أدنى.
+   - إرسال بدون خادم عبر FormSubmit إلى بريد الموقع.
+   - reCAPTCHA v3 اختياري: يُفعَّل عند وضع المفتاح في js/config.js.
+   - بديل mailto عند فشل الإرسال.
+   ---------------------------------------------------------------- */
+(function () {
+    var form = document.getElementById("askForm");
+    if (!form) return;
 
-    var to = siteConfig.contact.email;
-    var body = 'الاسم: ' + name + '\n' +
-               'البريد: ' + email + '\n\n' +
-               message + '\n\n' +
-               '— أُرسل من موقع فسر حلمك';
+    var statusEl = document.getElementById("askStatus");
+    var submitBtn = document.getElementById("askSubmit");
+    var startedEl = document.getElementById("askStartedAt");
+    var recaptchaLoaded = false;
+    var recaptchaLoading = false;
 
-    var href = 'mailto:' + encodeURIComponent(to) +
-               '?subject=' + encodeURIComponent('[موقع فسر حلمك] ' + subject) +
-               '&body=' + encodeURIComponent(body);
+    startedEl.value = String(Date.now());
 
-    window.location.href = href;
-    return false;
-}
+    function showStatus(message, ok, withMailto) {
+        statusEl.className = "form-status " + (ok ? "ok" : "err");
+        statusEl.textContent = message;
+        if (withMailto) {
+            var a = document.createElement("a");
+            a.href = withMailto;
+            a.textContent = " إرسال عبر برنامج البريد";
+            a.style.marginRight = "6px";
+            a.style.fontWeight = "700";
+            statusEl.appendChild(a);
+        }
+    }
+
+    function buildMailto(name, email, category, dream) {
+        var body = "الاسم: " + (name || "غير مذكور") + "\n" +
+            "البريد: " + (email || "غير مذكور") + "\n" +
+            "نوع الحلم: " + category + "\n\n" +
+            dream + "\n\n— أُرسل من موقع فسر حلمك";
+        return "mailto:" + encodeURIComponent(siteConfig.contact.email) +
+            "?subject=" + encodeURIComponent("[سؤال عن حلم] " + category) +
+            "&body=" + encodeURIComponent(body);
+    }
+
+    function loadRecaptcha(key) {
+        return new Promise(function (resolve, reject) {
+            if (recaptchaLoaded && window.grecaptcha) return resolve();
+            if (recaptchaLoading) {
+                var check = setInterval(function () {
+                    if (window.grecaptcha && window.grecaptcha.ready) {
+                        clearInterval(check);
+                        recaptchaLoaded = true;
+                        resolve();
+                    }
+                }, 200);
+                return;
+            }
+            recaptchaLoading = true;
+            var s = document.createElement("script");
+            s.src = "https://www.google.com/recaptcha/api.js?render=" + encodeURIComponent(key);
+            s.async = true;
+            s.onload = function () { recaptchaLoaded = true; resolve(); };
+            s.onerror = function () { recaptchaLoading = false; reject(new Error("recaptcha")); };
+            document.head.appendChild(s);
+        });
+    }
+
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        // 1) مصيدة الروبوتات
+        var honey = form.querySelector('[name="_honey"]');
+        if (honey && honey.value) return;
+
+        var name = document.getElementById("askName").value.trim();
+        var email = document.getElementById("askEmail").value.trim();
+        var category = document.getElementById("askCategory").value;
+        var dream = document.getElementById("askDream").value.trim();
+        var mailtoFallback = buildMailto(name, email, category, dream);
+
+        // 2) شرط زمني: لا يُقبل النموذج خلال أول 3 ثوانٍ
+        var elapsed = Date.now() - parseInt(startedEl.value, 10);
+        if (elapsed < 3000) {
+            showStatus("انتظر لحظة ثم أعد المحاولة.", false);
+            return;
+        }
+
+        // 3) تحقق من طول الوصف
+        if (dream.length < 20) {
+            showStatus("اكتب وصفاً للحلم لا يقل عن 20 حرفاً.", false);
+            document.getElementById("askDream").focus();
+            return;
+        }
+
+        // 4) بريد اختياري: تحقق من الصيغة إن كُتب
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+            showStatus("صيغة البريد الإلكتروني غير صحيحة.", false);
+            document.getElementById("askEmail").focus();
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "جارٍ الإرسال...";
+        showStatus("جارٍ إرسال سؤالك...", true);
+
+        try {
+            var payload = {
+                "الاسم": name || "غير مذكور",
+                "البريد": email || "غير مذكور",
+                "نوع الحلم": category,
+                "وصف الحلم": dream,
+                "_subject": "[موقع فسر حلمك] سؤال عن حلم — " + category,
+                "_template": "table",
+                "_captcha": "false"
+            };
+
+            // reCAPTCHA v3 اختياري
+            var key = siteConfig.contact.recaptchaSiteKey;
+            if (key) {
+                await loadRecaptcha(key);
+                await new Promise(function (resolve) { window.grecaptcha.ready(resolve); });
+                var token = await window.grecaptcha.execute(key, { action: "ask_question" });
+                payload["g-recaptcha-response"] = token;
+            }
+
+            var endpoint = siteConfig.contact.formEndpoint;
+            var res = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            var data = null;
+            try { data = await res.json(); } catch (ignore) {}
+
+            var ok = res.ok && data && (data.success === true || data.success === "true");
+            if (!ok) throw new Error("send-failed");
+
+            showStatus("تم إرسال سؤالك بنجاح. سنحاول الرد عليك خلال " + siteConfig.contact.responseTime + ".", true);
+            form.reset();
+            startedEl.value = String(Date.now());
+        } catch (err) {
+            showStatus("تعذّر الإرسال الآلي الآن. يمكنك إرسال السؤال عبر برنامج البريد:", false, mailtoFallback);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "إرسال السؤال";
+        }
+    });
+})();
 </script>
+<script src="js/theme.js"></script>
+<script src="js/mobile_search.js"></script>
+<script src="js/pwa.js"></script>
 </body>
 </html>
