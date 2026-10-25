@@ -1,0 +1,8 @@
+<div aria-label="تقييم التفسير" style="display:flex;gap:12px;align-items:center;padding:12px 0;">
+<button onclick="voteHelpful(this,1)" aria-label="مفيد" style="background:#059669;color:#fff;padding:8px 16px;border:none;border-radius:20px;cursor:pointer;font-family:inherit;font-weight:600;">👍 مفيد</button>
+<button onclick="voteHelpful(this,0)" aria-label="غير مفيد" style="background:#DC2626;color:#fff;padding:8px 16px;border:none;border-radius:20px;cursor:pointer;font-family:inherit;font-weight:600;">👎 غير مفيد</button>
+<span id="voteMsg" style="color:#B8A07A;font-size:.9rem;"></span>
+</div>
+<script>
+function voteHelpful(btn,val){ try{ localStorage.setItem("vote_"+new URLSearchParams(location.search).get("symbol"), val); document.getElementById("voteMsg").textContent = "شكراً على تقييمك."; }catch(e){} }
+</script>
