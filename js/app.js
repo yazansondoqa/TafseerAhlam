@@ -288,6 +288,11 @@ function displaySymbol(symbol, interpreterFilter) {
 
     container.innerHTML = html;
 
+    // bookmark button visible
+    var bmBox = document.getElementById("bookmarkBox");
+    if (!bmBox && container) { var bm = document.createElement("div"); bm.id = "bookmarkBox"; bm.style.padding = "10px 0"; container.appendChild(bm); }
+    if (bmBox) { if (typeof showBookmarkBtn === "function") showBookmarkBtn(window.currentSymbol || symbol, "bookmarkBox"); }
+
     if (interpreterFilter && interpreters[interpreterFilter]) {
         const btn = document.querySelector('.filter-btn[data-filter="' + interpreterFilter + '"]');
         if (btn) activateFilter(btn, interpreterFilter);
