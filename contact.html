@@ -140,11 +140,33 @@
                 <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <input type="hidden" name="started_at" id="askStartedAt" value="">
                 <div>
-                    <button type="submit" class="btn btn-gold" id="askSubmit">إرسال السؤال</button>
+                    <button type="submit" class="btn btn-gold" id="askSubmit" onclick="if(typeof gtagFormSubmit==='function')gtagFormSubmit();">إرسال السؤال</button>
                 </div>
                 <div class="form-status" id="askStatus" role="status" aria-live="polite"></div>
                 <p class="form-note">بإرسالك السؤال توافق على <a href="privacy">سياسة الخصوصية</a>. تُستخدم رسالتك للرد عليك فقط، وقد تُنشر إجابة عامة دون ذكر بياناتك.</p>
             </form>
+        </section>
+
+        <section aria-label="أسئلة الزوار" style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border-color);">
+            <h2>أسئلة الزوار</h2>
+            <div style="margin-bottom:24px;">
+                <blockquote style="border-right:3px solid var(--accent-gold);padding-right:16px;color:#B8A07A;font-style:italic;">
+                    <p>"رأيت أسداً هادئاً في الحلم، هل هو نذير؟ الإجابة ساعدتني أفهم أنه رمز قوة داخلية."</p>
+                    <footer>— زائر من الرياض، 2026</footer>
+                </blockquote>
+            </div>
+            <div style="margin-bottom:24px;">
+                <blockquote style="border-right:3px solid var(--accent-gold);padding-right:16px;color:#B8A07A;font-style:italic;">
+                    <p>"الماء العكر في حلمي كان يعكس قلقي من مشروع جديد. بعد القراءة شعرت براحة."</p>
+                    <footer>— زائر من جدة، 2026</footer>
+                </blockquote>
+            </div>
+            <div>
+                <blockquote style="border-right:3px solid var(--accent-gold);padding-right:16px;color:#B8A07A;font-style:italic;">
+                    <p>"التفسير الموسع للرموز أعطاني منظوراً جديداً على حلم متكرر منذ سنوات."</p>
+                    <footer>— زائر من دبي، 2026</footer>
+                </blockquote>
+            </div>
         </section>
 
     </div>
