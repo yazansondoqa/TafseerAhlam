@@ -1,9 +1,34 @@
 # ================================================================
 # إعادة توجيهات Cloudflare Pages
-# الصيغة: المسار_الطلب المسار_الهدف رمز_الحالة
 # ================================================================
 
-# خريطة الموقع: السماح بكل الصيغ الشائعة
+# خريطة الموقع
 /sitemap /sitemap.xml 301
 /sitemap/ /sitemap.xml 301
 /sitemap_index.xml /sitemap.xml 301
+
+# صفحات قديمة أُزيلت من الموقع
+/article-methodology.html /about 301
+/article-methodology /about 301
+/article-methodology-2.html /about 301
+/article-methodology-2 /about 301
+/article-methodology-3.html /about 301
+/article-methodology-3 /about 301
+/backlinks-targets.html / 301
+/backlinks-targets / 301
+/analytics-placeholder.html / 301
+/analytics-placeholder / 301
+/videos.html /articles 301
+/videos /articles 301
+
+# روابط بصيغة .html إلى العناوين النظيفة
+/articles.html /articles 301
+/about.html /about 301
+/contact.html /contact 301
+/privacy.html /privacy 301
+/terms.html /terms 301
+/interpreters.html /interpreters 301
+/quran-index.html /quran-index 301
+/dream-journal.html /dream-journal 301
+/letter.html /letters/ 301
+/categories.html /categories/ 301

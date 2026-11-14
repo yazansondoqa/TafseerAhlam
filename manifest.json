@@ -1,7 +1,7 @@
 {
   "name": "فسر حلمك — تفسير الأحلام والرؤى",
   "short_name": "فسر حلمك",
-  "description": "موقع عربي لتفسير الأحلام حسب الحروف الأبجدية عند ابن سيرين والنابلسي وابن شاهين والإمام جعفر الصادق.",
+  "description": "موقع عربي لتفسير الأحلام: فهرس الحروف، وتصنيفات موضوعية، وتفسيرات موسّعة لأشهر الرموز، مع أقوال ابن سيرين والنابلسي وابن شاهين والإمام الصادق.",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "/",
@@ -10,7 +10,11 @@
   "orientation": "portrait-primary",
   "background_color": "#0E0D0B",
   "theme_color": "#0E0D0B",
-  "categories": ["lifestyle", "education", "reference"],
+  "categories": [
+    "lifestyle",
+    "education",
+    "reference"
+  ],
   "icons": [
     {
       "src": "/assets/icon-192.png",
@@ -33,22 +37,48 @@
   ],
   "shortcuts": [
     {
-      "name": "تصفح الحروف",
+      "name": "فهرس الحروف",
       "short_name": "الحروف",
-      "url": "/letter",
-      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192" }]
+      "url": "/letters/",
+      "icons": [
+        {
+          "src": "/assets/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "تصنيفات الأحلام",
+      "short_name": "التصنيفات",
+      "url": "/categories/",
+      "icons": [
+        {
+          "src": "/assets/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "تفسيرات موسّعة",
+      "short_name": "التفسيرات",
+      "url": "/dreams/",
+      "icons": [
+        {
+          "src": "/assets/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "المقالات",
       "short_name": "المقالات",
       "url": "/articles",
-      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "تصنيفات الأحلام",
-      "short_name": "التصنيفات",
-      "url": "/categories",
-      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/assets/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

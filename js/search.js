@@ -1,21 +1,31 @@
 ﻿/* ================================================================
-   موقع تفسير الأحلام — محرك البحث الفوري
-   ملف: js/search.js
+   فسر حلمك — البحث الفوري في فهرس الرموز الثابت
+   الملف: js/search.js
    ----------------------------------------------------------------
-   مزايا هذه النسخة:
-   - تطبيع الحروف العربية: البحث عن "اسد" يجد "أسد"، و"شجره" يجد "شجرة".
-   - نتائج على شكل روابط حقيقية (أفضل لمحركات البحث وإمكانية الوصول).
-   - ترتيب ذكي: مطابقة أول الكلمة أولاً ثم الاحتواء.
-   - تنقّل بالأسهم بين النتائج.
+   يعتمد على js/site-index.js الذي يُولَّد مع الصفحات الثابتة.
+   لا يحتاج إلى تحميل قاعدة البيانات الكاملة في المتصفح.
    ================================================================ */
 
-/** تطبيع نص للبحث (يعتمد على normalizeArabic من app.js) */
 function searchKey(text) {
     return normalizeArabic(text);
 }
 
+/** إرجاع جميع مدخلات البحث من الفهرس الثابت */
+function searchEntries() {
+    if (!window.siteIndex || !window.siteIndex.symbols) return [];
+    return Object.keys(window.siteIndex.symbols).map(function (word) {
+        const entry = window.siteIndex.symbols[word];
+        return {
+            word: word,
+            url: entry.url,
+            letter: entry.letter,
+            count: entry.count || 0
+        };
+    });
+}
+
 /**
- * البحث في قاعدة البيانات.
+ * البحث في فهرس الرموز.
  * @param {string} query نص البحث
  * @param {number} limit أقصى عدد نتائج
  */
@@ -25,48 +35,40 @@ function searchInDatabase(query, limit) {
     if (!q) return [];
 
     const scored = [];
-
-    for (const [word, data] of Object.entries(dreamDatabase)) {
-        const key = searchKey(word);
+    searchEntries().forEach(function (entry) {
+        const key = searchKey(entry.word);
         let score = -1;
 
         if (key === q) {
-            score = 100;                 // مطابقة تامة
+            score = 100;
         } else if (key.startsWith(q)) {
-            score = 80 - (key.length - q.length); // تبدأ بالنص
+            score = 80 - (key.length - q.length);
         } else if (key.includes(q)) {
-            score = 50 - key.indexOf(q);          // تحتوي النص
-        } else {
-            // مطابقة كلمات التفسير (بحث ثانوي داخل النصوص)
-            const inText = Object.values(data.interpretations || {})
-                .some(t => searchKey(t).includes(q));
-            if (inText) score = 10;
+            score = 50 - key.indexOf(q);
         }
 
         if (score >= 0) {
-            scored.push({
-                word,
-                letter: data.letter,
-                count: Object.keys(data.interpretations || {}).length,
-                score
-            });
+            entry.score = score;
+            scored.push(entry);
         }
-    }
+    });
 
     return scored
-        .sort((a, b) => (b.score - a.score) || a.word.localeCompare(b.word, "ar"))
+        .sort(function (a, b) {
+            return (b.score - a.score) || a.word.localeCompare(b.word, "ar");
+        })
         .slice(0, max);
 }
 
 /** توجيه المستخدم إلى صفحة الرمز */
 function goToSymbol(word) {
-    window.location.href = "letter?symbol=" + encodeURIComponent(word);
+    window.location.href = (window.symbolUrl ? window.symbolUrl(word) : "/letters/");
 }
 
-/** بناء HTML لنتيجة بحث كرابط (يعمل بلوحة المفاتيح) */
+/** بناء HTML لنتيجة بحث كرابط */
 function resultItemHtml(r, index) {
     return '<a class="result-item" id="search-result-' + index + '" role="option"' +
-        ' href="letter?symbol=' + encodeURIComponent(r.word) + '">' +
+        ' href="' + escapeHtml(r.url) + '">' +
         "<span>" + escapeHtml(r.word) + "</span>" +
         '<span class="badge">' + r.count + " تفسير</span></a>";
 }
@@ -92,9 +94,7 @@ function liveSearch(query) {
         return;
     }
 
-    resultsContainer.innerHTML = results
-        .map((r, i) => resultItemHtml(r, i))
-        .join("");
+    resultsContainer.innerHTML = results.map(resultItemHtml).join("");
 }
 
 /** تنفيذ البحث عند الضغط على زر البحث أو Enter */
@@ -110,13 +110,10 @@ function performSearch() {
     if (results.length > 0) {
         goToSymbol(results[0].word);
     } else {
-        liveSearch(q); // إظهار رسالة "لا توجد نتائج"
+        liveSearch(q);
     }
 }
 
-/* ----------------------------------------------------------------
-   ربط أحداث البحث (كتابة فورية + Enter + أسهم لوحة المفاتيح)
-   ---------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById("mainSearch");
     if (!input) return;
@@ -124,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let debounce;
     input.addEventListener("input", function () {
         clearTimeout(debounce);
-        debounce = setTimeout(() => liveSearch(input.value), 160);
+        debounce = setTimeout(function () { liveSearch(input.value); }, 160);
     });
 
     input.addEventListener("keydown", function (e) {
@@ -140,14 +137,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // إغلاق النتائج عند النقر خارجها
     document.addEventListener("click", function (e) {
         const box = document.getElementById("searchResults");
         if (!box) return;
         if (!box.contains(e.target) && e.target !== input) box.innerHTML = "";
     });
 
-    // دعم الوصول من شريط البحث اللاصق: /?q=كلمة
     const params = new URLSearchParams(window.location.search);
     const initialQuery = (params.get("q") || "").trim();
     if (initialQuery.length >= 2) {

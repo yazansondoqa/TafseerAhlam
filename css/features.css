@@ -457,3 +457,514 @@
     .deep-content { padding: 18px; }
     .deep-content h2 { font-size: 1.2rem; }
 }
+
+
+/* ================================================================
+   Static content hubs (letters, categories, extended dream pages)
+   Added for the editorial rebuild.
+   ================================================================ */
+
+.content-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 28px 30px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+}
+
+.content-card > h2 {
+    font-size: 1.5rem;
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.content-card h3 {
+    font-size: 1.15rem;
+    margin: 22px 0 8px;
+    color: var(--accent-gold-dark);
+}
+
+.content-card p,
+.content-card li {
+    line-height: 2;
+    color: var(--text-primary);
+}
+
+.content-card p {
+    margin-bottom: 12px;
+}
+
+.content-card .note {
+    margin-top: 18px;
+}
+
+.section-lead {
+    color: var(--text-secondary) !important;
+    font-size: 0.97rem;
+    margin-bottom: 20px !important;
+}
+
+.guide-list {
+    margin: 12px 0 4px;
+    padding-inline-start: 22px;
+}
+
+.guide-list li {
+    margin-bottom: 10px;
+}
+
+/* Letter index */
+.letters-index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.letter-index-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    padding: 18px 12px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-white);
+    color: var(--text-primary);
+    transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.letter-index-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-green);
+    box-shadow: var(--shadow-md);
+}
+
+.letter-index-char {
+    font-family: 'Amiri', serif;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    color: var(--accent-green);
+}
+
+.letter-index-name {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.letter-index-count {
+    font-size: 0.78rem;
+    color: var(--accent-gold-dark);
+    background: var(--accent-gold-soft);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-pill);
+    padding: 2px 10px;
+}
+
+.letter-index-sample {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+/* Pills */
+.pill-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 8px 0 16px;
+}
+
+.pill-link {
+    display: inline-block;
+    padding: 7px 15px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    transition: all var(--t-fast);
+}
+
+.pill-link:hover {
+    background: var(--accent-green);
+    border-color: var(--accent-green);
+    color: #fff;
+}
+
+/* Symbol cards */
+.symbol-summary {
+    font-size: 1.01rem;
+    line-height: 2;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    margin: 8px 0 0;
+}
+
+.symbol-card h3 {
+    flex-wrap: wrap;
+}
+
+.symbol-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    padding: 0 9px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--accent-gold-dark);
+    font-family: 'Amiri', serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+.symbol-more {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.92rem;
+}
+
+.symbol-more a {
+    color: var(--accent-green);
+    font-weight: 700;
+}
+
+/* Letter sidebar */
+.aside-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.aside-card h3 {
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--accent-gold-dark);
+}
+
+.aside-links {
+    display: grid;
+    gap: 8px;
+    font-size: 0.92rem;
+}
+
+.aside-links a {
+    color: var(--text-secondary);
+}
+
+.aside-links a:hover {
+    color: var(--accent-green);
+}
+
+.mini-letter-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.mini-letter-grid a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    color: var(--accent-green);
+    font-family: 'Amiri', serif;
+    font-size: 1rem;
+    border: 1px solid transparent;
+}
+
+.mini-letter-grid a:hover,
+.mini-letter-grid a.active {
+    background: var(--accent-green);
+    color: #fff;
+}
+
+/* Category cards and pages */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.category-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-white);
+    color: var(--text-primary);
+    transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-gold);
+    box-shadow: var(--shadow-md);
+}
+
+.category-icon {
+    font-size: 1.7rem;
+}
+
+.category-card h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--accent-green);
+}
+
+.category-card p {
+    margin: 0;
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+
+.category-count {
+    font-size: 0.78rem;
+    color: var(--accent-gold-dark);
+}
+
+.category-symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.category-symbol {
+    padding: 18px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-white);
+}
+
+.category-symbol h3 {
+    margin: 0 0 6px;
+    font-size: 1.15rem;
+}
+
+.category-symbol h3 a {
+    color: var(--accent-green);
+}
+
+.category-symbol p {
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--text-secondary);
+}
+
+.symbol-meta {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+}
+
+.article-link-list {
+    display: grid;
+    gap: 8px;
+    margin: 10px 0 0;
+    padding-inline-start: 20px;
+}
+
+.article-link-list li {
+    line-height: 1.9;
+}
+
+/* FAQ */
+.faq-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 8px;
+}
+
+.faq-item {
+    padding: 16px 18px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-secondary);
+}
+
+.faq-item h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    color: var(--accent-green);
+}
+
+.faq-item p {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.95;
+    color: var(--text-secondary);
+}
+
+/* Dreams index and pages */
+.dream-index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.dream-index-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 22px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-white);
+    color: var(--text-primary);
+    transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.dream-index-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-green);
+    box-shadow: var(--shadow-md);
+}
+
+.dream-index-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--accent-gold-soft);
+    border: 1px solid var(--border-color);
+    color: var(--accent-gold-dark);
+    font-family: 'Amiri', serif;
+    font-size: 1.6rem;
+}
+
+.dream-index-card h3 {
+    margin: 2px 0 0;
+    font-size: 1.15rem;
+    color: var(--accent-green);
+}
+
+.dream-index-card p {
+    margin: 0;
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--text-secondary);
+}
+
+.dream-index-more {
+    font-size: 0.85rem;
+    color: var(--accent-gold-dark);
+}
+
+.dream-page .dream-lead {
+    background: linear-gradient(135deg, var(--bg-white), var(--accent-gold-soft));
+}
+
+.dream-page .scholars-section .interpretation:last-of-type {
+    margin-bottom: 18px;
+}
+
+.dream-page .scholars-section > p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.dream-page .related-section .pill-links {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 960px) {
+    .letter-page-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .letter-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .content-card {
+        padding: 20px 18px;
+    }
+    .letters-index-grid,
+    .category-grid,
+    .category-symbols-grid,
+    .dream-index-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .category-symbols-grid,
+    .dream-index-grid {
+        grid-template-columns: 1fr;
+    }
+    .mini-letter-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+    .letter-nav-inner {
+        padding: 8px 12px;
+    }
+    .letter-nav-inner a {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+    }
+}
+
+
+[data-theme="dark"] .letter-header { background: linear-gradient(135deg, var(--bg-white), var(--accent-gold-soft)); }
+[data-theme="dark"] .symbol-summary { background: var(--bg-secondary); }
+
+/* Applied dream-reading examples on category hubs */
+.scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.scenario-card {
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-white);
+}
+
+.scenario-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+    color: var(--accent-green);
+}
+
+.scenario-card p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.95;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+    .scenario-grid {
+        grid-template-columns: 1fr;
+    }
+}

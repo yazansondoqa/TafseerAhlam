@@ -1,8 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /404.html
-Crawl-delay: 10
-
-Host: https://www.tafseerahlam.store
 
 Sitemap: https://www.tafseerahlam.store/sitemap.xml

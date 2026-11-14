@@ -1,33 +1,30 @@
 /* ================================================================
    فسر حلمك — Service Worker
-   استراتيجية:
-   - صفحات HTML: الشبكة أولاً ثم النسخة المخزّنة (حتى تظهر التحديثات).
-   - الأصول الثابتة (CSS/JS/صور/خطوط): النسخة المخزّنة أولاً.
-   - عند انقطاع الشبكة: صفحة رئيسية مخزّنة كبديل.
+   - صفحات HTML: الشبكة أولاً ثم النسخة المخزّنة.
+   - الأصول الثابتة: النسخة المخزّنة أولاً.
+   - عند انقطاع الشبكة: الصفحة الرئيسية المخزّنة.
    ================================================================ */
 
-const CACHE_NAME = "tafseer-ahlam-v1";
+const CACHE_NAME = "tafseer-ahlam-v2";
 const OFFLINE_URL = "/index.html";
 
 const PRECACHE = [
     "/",
     "/index.html",
-    "/letter",
+    "/letters/",
+    "/categories/",
+    "/dreams/",
     "/articles",
-    "/categories",
+    "/about",
     "/css/style.css",
     "/css/responsive.css",
     "/css/features.css",
     "/js/config.js",
-    "/js/app.js",
+    "/js/site-index.js",
     "/js/search.js",
-    "/js/bookmark_feature.js",
+    "/js/app.js",
     "/js/theme.js",
     "/js/mobile_search.js",
-    "/js/data.js",
-    "/js/data_extra.js",
-    "/js/data_v2.js",
-    "/js/data_v3.js",
     "/manifest.json",
     "/assets/icon-192.png",
     "/assets/icon-512.png",
@@ -46,7 +43,7 @@ self.addEventListener("activate", (event) => {
     event.waitUntil(
         caches.keys()
             .then((keys) => Promise.all(
-                keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
+                keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
             ))
             .then(() => self.clients.claim())
     );
@@ -59,7 +56,6 @@ self.addEventListener("fetch", (event) => {
     const url = new URL(req.url);
     if (url.origin !== self.location.origin) return;
 
-    // صفحات HTML: الشبكة أولاً
     const acceptsHtml = req.headers.get("accept") && req.headers.get("accept").includes("text/html");
     if (acceptsHtml || url.pathname.endsWith(".html")) {
         event.respondWith(
@@ -74,7 +70,6 @@ self.addEventListener("fetch", (event) => {
         return;
     }
 
-    // أصول ثابتة: المخزّن أولاً
     event.respondWith(
         caches.match(req).then((cached) => {
             if (cached) return cached;
